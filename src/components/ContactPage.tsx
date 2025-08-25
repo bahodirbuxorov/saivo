@@ -40,6 +40,16 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
     description: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<null | 'success' | 'error'>(null);
+
+  const BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN as string | undefined;
+  const CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID as string | undefined;
+
+  const escapeHtml = (str: string) =>
+    str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -52,13 +62,67 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    // Reset form or show success message
-    console.log('Form submitted:', formData);
+    setSubmitStatus(null);
+
+    try {
+      if (!BOT_TOKEN || !CHAT_ID) {
+        throw new Error('Missing Telegram configuration');
+      }
+
+      const text = [
+        '<b>New Contact Form Submission</b>',
+        `👤 <b>Name:</b> ${escapeHtml(formData.name)}`,
+        `📞 <b>Phone:</b> ${escapeHtml(formData.phone)}`,
+        formData.company ? `🏢 <b>Company:</b> ${escapeHtml(formData.company)}` : undefined,
+        formData.service ? `🧩 <b>Service:</b> ${escapeHtml(formData.service)}` : undefined,
+        '',
+        `<b>Message:</b>\n${escapeHtml(formData.description)}`
+      ]
+        .filter(Boolean)
+        .join('\n');
+
+      const sendTo = async (id: string) => {
+        const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: id, text, parse_mode: 'HTML', disable_web_page_preview: true })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) throw new Error(data?.description || 'Telegram API error');
+        return true;
+      };
+
+      // Try provided ID first, then supergroup and group variants
+      const raw = CHAT_ID.toString();
+      const stripped = raw.replace(/^(-100|-)/, '');
+      const candidates = Array.from(new Set([
+        raw,
+        `-100${stripped}`,
+        `-${stripped}`,
+      ]));
+
+      let sent = false;
+      let lastErr: unknown = null;
+      for (const id of candidates) {
+        try {
+          await sendTo(id);
+          sent = true;
+          break;
+        } catch (e) {
+          lastErr = e;
+          // continue to next candidate
+        }
+      }
+      if (!sent) throw lastErr || new Error('Failed to send to any chat id variant');
+
+      setSubmitStatus('success');
+      setFormData({ name: '', phone: '', company: '', service: '', description: '' });
+    } catch (err) {
+      console.error(err);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -414,6 +478,13 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                         </span>
                       </Button>
                     </motion.div>
+
+                    {submitStatus === 'success' && (
+                      <p className="text-emerald-600 font-medium mt-3">Message sent successfully. We will contact you soon.</p>
+                    )}
+                    {submitStatus === 'error' && (
+                      <p className="text-red-600 font-medium mt-3">Failed to send. Please try again or use our contacts below.</p>
+                    )}
                   </form>
                 </CardContent>
               </Card>
