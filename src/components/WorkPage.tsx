@@ -283,7 +283,7 @@ export function WorkPage({ onNavigate }: WorkPageProps) {
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.3 }}
               >
-                <Card className="h-full overflow-hidden hover:shadow-2xl transition-all duration-500 bg-white border-0 shadow-lg group">
+                <Card className="h-full flex flex-col overflow-hidden hover:shadow-2xl transition-all duration-500 bg-white border-0 shadow-lg group">
                   <div className={`aspect-video bg-gradient-to-br ${getCategoryColor(project.category)} relative overflow-hidden`}>
                     <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-black/40"></div>
                     <div className="absolute inset-0 flex flex-col justify-between p-8 text-white">
@@ -322,55 +322,57 @@ export function WorkPage({ onNavigate }: WorkPageProps) {
                     />
                   </div>
                   
-                  <CardContent className="p-8 space-y-6">
+                  <CardContent className="p-8 flex-1 flex flex-col">
                     <div className="space-y-3">
                       <h4 className="text-blue-600 font-semibold text-lg">{project.subtitle}</h4>
                       <p className="text-gray-600 leading-relaxed">
                         {project.description}
                       </p>
                     </div>
-                    
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                        <Badge key={techIndex} variant="secondary" className="bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
-                          {tech}
-                        </Badge>
-                      ))}
-                      {project.technologies.length > 3 && (
-                        <Badge variant="secondary" className="bg-blue-100 text-blue-700">
-                          +{project.technologies.length - 3} {t('work.tech.more')}
-                        </Badge>
-                      )}
-                    </div>
-                    
-                    <div className="flex gap-3 pt-4">
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="flex-1"
-                      >
-                        <Button asChild size="sm" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                          <a href={project.url} target="_blank" rel="noopener noreferrer">
-                            <span className="flex items-center justify-center space-x-2">
-                              <span>{t('work.viewProject')}</span>
-                              <ExternalLink className="h-4 w-4" />
-                            </span>
-                          </a>
-                        </Button>
-                      </motion.div>
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <Button 
-                          size="sm" 
-                          variant="outline" 
-                          onClick={() => onNavigate?.('contact')}
-                          className="border-gray-300 hover:border-blue-400 hover:bg-blue-50"
+
+                    <div className="mt-auto space-y-4">
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.slice(0, 3).map((tech, techIndex) => (
+                          <Badge key={techIndex} variant="secondary" className="bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+                            {tech}
+                          </Badge>
+                        ))}
+                        {project.technologies.length > 3 && (
+                          <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                            +{project.technologies.length - 3} {t('work.tech.more')}
+                          </Badge>
+                        )}
+                      </div>
+
+                      <div className="flex gap-3 pt-2">
+                        <motion.div
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="flex-1"
                         >
-                          {t('work.caseStudy')}
-                        </Button>
-                      </motion.div>
+                          <Button asChild size="sm" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
+                            <a href={project.url} target="_blank" rel="noopener noreferrer">
+                              <span className="flex items-center justify-center space-x-2">
+                                <span>{t('work.viewProject')}</span>
+                                <ExternalLink className="h-4 w-4" />
+                              </span>
+                            </a>
+                          </Button>
+                        </motion.div>
+                        <motion.div
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <Button 
+                            size="sm" 
+                            variant="outline" 
+                            onClick={() => onNavigate?.('contact')}
+                            className="bg-transparent border-gray-300 hover:border-blue-400 hover:bg-blue-50"
+                          >
+                            {t('work.caseStudy')}
+                          </Button>
+                        </motion.div>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -426,7 +428,7 @@ export function WorkPage({ onNavigate }: WorkPageProps) {
                 whileHover={{ y: -8 }}
                 transition={{ duration: 0.3 }}
               >
-                <Card className="h-full overflow-hidden hover:shadow-2xl transition-all duration-500 bg-white/80 backdrop-blur-sm border-0 shadow-lg group">
+                <Card className="h-full flex flex-col overflow-hidden hover:shadow-2xl transition-all duration-500 bg-white/80 backdrop-blur-sm border-0 shadow-lg group">
                   <div className={`aspect-video bg-gradient-to-br ${getCategoryColor(project.category)} relative overflow-hidden`}>
                     <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-black/40"></div>
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -468,58 +470,60 @@ export function WorkPage({ onNavigate }: WorkPageProps) {
                     )}
                   </div>
                   
-                  <CardContent className="p-6 space-y-4">
+                  <CardContent className="p-6 flex-1 flex flex-col">
                     <div className="space-y-2">
                       <h4 className="text-blue-600 font-semibold text-lg group-hover:text-purple-600 transition-colors duration-300">
                         {project.subtitle}
                       </h4>
                     </div>
-                    
+
                     <p className="text-gray-600 text-sm line-clamp-3 leading-relaxed">
                       {project.description}
                     </p>
-                    
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.slice(0, 2).map((tech, techIndex) => (
-                        <Badge key={techIndex} variant="secondary" className="text-xs bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
-                          {tech}
-                        </Badge>
-                      ))}
-                      {project.technologies.length > 2 && (
-                        <Badge variant="secondary" className="text-xs bg-blue-100 text-blue-700">
-                          +{project.technologies.length - 2} {t('work.tech.more')}
-                        </Badge>
-                      )}
-                    </div>
-                    
-                    <div className="flex gap-2 pt-3">
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="flex-1"
-                      >
-                        <Button asChild size="sm" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
-                          <a href={project.url} target="_blank" rel="noopener noreferrer">
-                            <span className="flex items-center justify-center space-x-1">
-                              <span>{t('work.viewProject')}</span>
-                              <ExternalLink className="h-3 w-3" />
-                            </span>
-                          </a>
-                        </Button>
-                      </motion.div>
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <Button 
-                          size="sm" 
-                          variant="outline" 
-                          onClick={() => onNavigate?.('contact')}
-                          className="border-gray-300 hover:border-blue-400 hover:bg-blue-50"
+
+                    <div className="mt-auto space-y-3">
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.slice(0, 2).map((tech, techIndex) => (
+                          <Badge key={techIndex} variant="secondary" className="text-xs bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+                            {tech}
+                          </Badge>
+                        ))}
+                        {project.technologies.length > 2 && (
+                          <Badge variant="secondary" className="text-xs bg-blue-100 text-blue-700">
+                            +{project.technologies.length - 2} {t('work.tech.more')}
+                          </Badge>
+                        )}
+                      </div>
+
+                      <div className="flex gap-2 pt-1">
+                        <motion.div
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="flex-1"
                         >
-                          <ArrowRight className="h-3 w-3" />
-                        </Button>
-                      </motion.div>
+                          <Button asChild size="sm" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
+                            <a href={project.url} target="_blank" rel="noopener noreferrer">
+                              <span className="flex items-center justify-center space-x-1">
+                                <span>{t('work.viewProject')}</span>
+                                <ExternalLink className="h-3 w-3" />
+                              </span>
+                            </a>
+                          </Button>
+                        </motion.div>
+                        <motion.div
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <Button 
+                            size="sm" 
+                            variant="outline" 
+                            onClick={() => onNavigate?.('contact')}
+                            className="bg-transparent border-gray-300 hover:border-blue-400 hover:bg-blue-50"
+                          >
+                            <ArrowRight className="h-3 w-3" />
+                          </Button>
+                        </motion.div>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -596,7 +600,7 @@ export function WorkPage({ onNavigate }: WorkPageProps) {
                 size="lg" 
                 variant="outline" 
                 onClick={() => onNavigate?.('contact')}
-                className="text-white border-2 border-white/30 hover:bg-white/10 hover:border-white transition-all duration-300 px-8 py-4 backdrop-blur-sm"
+                className="bg-transparent text-white border-2 border-white/30 hover:bg-white/10 hover:border-white transition-all duration-300 px-8 py-4 backdrop-blur-sm"
               >
                 {t('work.cta.scheduleCall')}
               </Button>

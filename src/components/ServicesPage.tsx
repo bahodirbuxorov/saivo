@@ -355,7 +355,7 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
                 transition={{ duration: 0.3 }}
                 onHoverStart={() => setActiveService(index)}
               >
-                <Card className={`h-full overflow-hidden hover:shadow-2xl transition-all duration-500 bg-white/90 backdrop-blur-sm border ${service.borderColor} shadow-lg group cursor-pointer`}>
+                <Card className={`h-full flex flex-col overflow-hidden hover:shadow-2xl transition-all duration-500 bg-white/90 backdrop-blur-sm border ${service.borderColor} shadow-lg group cursor-pointer`}>
                   <CardHeader className="p-8">
                     <motion.div
                       className={`w-20 h-20 rounded-3xl bg-gradient-to-br ${service.bgColor} flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg`}
@@ -373,7 +373,7 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
                     </p>
                   </CardHeader>
                 
-                  <CardContent className="p-8 pt-0 space-y-6">
+                  <CardContent className="p-8 pt-0 space-y-6 flex-1 flex flex-col">
                     <div className="space-y-4">
                       <h4 className="font-semibold text-gray-900 text-lg">{t('services.keyFeatures')}</h4>
                       <ul className="space-y-2">
@@ -392,39 +392,42 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
                         ))}
                       </ul>
                     </div>
-                    
-                    <div className="space-y-4">
-                      <h4 className="font-semibold text-gray-900 text-lg">{t('services.technologies')}</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {service.technologies.map((tech, techIndex) => (
-                          <Badge key={techIndex} variant="secondary" className="bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
 
-                    <div className="flex justify-center items-center pt-4 border-t border-gray-100">
-                      <div className="space-y-1 text-center">
-                        <p className="text-sm text-gray-500">{t('services.timeline')}</p>
-                        <p className="font-medium text-gray-700">{service.timeline}</p>
+                    {/* Bottom-pinned section: technologies, timeline, and button */}
+                    <div className="mt-auto space-y-4">
+                      <div className="space-y-4">
+                        <h4 className="font-semibold text-gray-900 text-lg">{t('services.technologies')}</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {service.technologies.map((tech, techIndex) => (
+                            <Badge key={techIndex} variant="secondary" className="bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+                              {tech}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
-                    </div>
 
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <Button 
-                        onClick={() => onNavigate?.('contact')}
-                        className={`w-full bg-gradient-to-r ${service.color} hover:opacity-90 text-white font-medium py-3 border-0 shadow-lg hover:shadow-xl transition-all duration-300`}
+                      <div className="flex justify-center items-center pt-4 border-t border-gray-100">
+                        <div className="space-y-1 text-center">
+                          <p className="text-sm text-gray-500">{t('services.timeline')}</p>
+                          <p className="font-medium text-gray-700">{service.timeline}</p>
+                        </div>
+                      </div>
+
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                       >
-                        <span className="flex items-center justify-center space-x-2">
-                          <span>{t('services.learnMore')}</span>
-                          <ArrowRight className="h-4 w-4" />
-                        </span>
-                      </Button>
-                    </motion.div>
+                        <Button 
+                          onClick={() => onNavigate?.('contact')}
+                          className={`w-full bg-gradient-to-r ${service.color} hover:opacity-90 text-white font-medium py-3 border-0 shadow-lg hover:shadow-xl transition-all duration-300`}
+                        >
+                          <span className="flex items-center justify-center space-x-2">
+                            <span>{t('services.learnMore')}</span>
+                            <ArrowRight className="h-4 w-4" />
+                          </span>
+                        </Button>
+                      </motion.div>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -703,7 +706,7 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="text-white border-2 border-white/40 hover:bg-white/10 hover:border-white hover:text-white transition-all duration-300 px-10 py-6 text-lg font-medium backdrop-blur-sm"
+                className="bg-transparent text-white border-2 border-white/40 hover:bg-white/10 hover:border-white hover:text-white transition-all duration-300 px-10 py-6 text-lg font-medium backdrop-blur-sm"
               >
                 Schedule Consultation
               </Button>

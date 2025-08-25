@@ -476,6 +476,14 @@ function AppContent() {
     duration: 0.4,
   };
 
+  // Ensure new pages open from the top
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Use auto to avoid interfering with page transition animations
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }
+  }, [currentPage, articleId]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       <Navigation currentPage={currentPage} onPageChange={handlePageChange} />

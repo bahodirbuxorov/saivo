@@ -139,7 +139,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
                   size="lg" 
                   variant="outline" 
                   onClick={() => onNavigate?.('work')}
-                  className="border-2 border-gray-300 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700 transition-all duration-300 px-8 py-6 text-lg font-medium"
+                  className="bg-transparent border-2 border-gray-300 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700 transition-all duration-300 px-8 py-6 text-lg font-medium"
                 >
                   {t('home.hero.ourWork')}
                 </Button>
