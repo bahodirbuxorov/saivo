@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from '../lib/translations';
 import { motion } from 'motion/react';
 import { Card, CardContent, CardHeader } from './ui/card';
@@ -7,6 +7,15 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Badge } from './ui/badge';
 import { Label } from './ui/label';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogAction,
+} from './ui/alert-dialog';
 import { 
   Mail, 
   Phone, 
@@ -41,6 +50,11 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<null | 'success' | 'error'>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (submitStatus) setIsModalOpen(true);
+  }, [submitStatus]);
 
   const BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN as string | undefined;
   const CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID as string | undefined;
@@ -479,16 +493,38 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                       </Button>
                     </motion.div>
 
-                    {submitStatus === 'success' && (
-                      <p className="text-emerald-600 font-medium mt-3">Message sent successfully. We will contact you soon.</p>
-                    )}
-                    {submitStatus === 'error' && (
-                      <p className="text-red-600 font-medium mt-3">Failed to send. Please try again or use our contacts below.</p>
-                    )}
                   </form>
                 </CardContent>
               </Card>
             </motion.div>
+            {/* Submission Modal */}
+            <AlertDialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+              <AlertDialogContent className="bg-white">
+                <AlertDialogHeader>
+                  <AlertDialogTitle className={submitStatus === 'success' ? 'text-emerald-700' : 'text-red-700'}>
+                    {submitStatus === 'success'
+                      ? t('contact.modal.success.title')
+                      : t('contact.modal.error.title')}
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    {submitStatus === 'success'
+                      ? t('contact.modal.success.desc')
+                      : t('contact.modal.error.desc')}
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogAction
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+                    onClick={() => {
+                      setIsModalOpen(false);
+                      setSubmitStatus(null);
+                    }}
+                  >
+                    {t('common.ok')}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
 
             {/* Contact Information */}
             <motion.div 
