@@ -36,10 +36,10 @@ export function Footer({ onPageChange }: FooterProps) {
       {/* Background Pattern */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950"></div>
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary to-transparent"></div>
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
         </div>
       </div>
       
@@ -120,10 +120,10 @@ export function Footer({ onPageChange }: FooterProps) {
                 >
                   <button 
                     onClick={() => onPageChange(service.page)}
-                    className="text-gray-400 hover:text-blue-400 transition-colors duration-300 flex items-center group text-lg"
+                    className="text-gray-400 hover:text-primary transition-colors duration-300 flex items-center group text-lg"
                   >
                     <motion.span 
-                      className="w-2 h-2 bg-blue-500 rounded-full mr-4 group-hover:bg-blue-400 transition-colors"
+                      className="w-2 h-2 bg-primary rounded-full mr-4 group-hover:bg-accent transition-colors"
                       whileHover={{ scale: 1.5 }}
                     />
                     {service.label}
@@ -158,10 +158,10 @@ export function Footer({ onPageChange }: FooterProps) {
                 >
                   <button 
                     onClick={() => onPageChange(item.page)}
-                    className="text-gray-400 hover:text-blue-400 transition-colors duration-300 flex items-center group text-lg"
+                    className="text-gray-400 hover:text-primary transition-colors duration-300 flex items-center group text-lg"
                   >
                     <motion.span 
-                      className="w-2 h-2 bg-blue-500 rounded-full mr-4 group-hover:bg-blue-400 transition-colors"
+                      className="w-2 h-2 bg-primary rounded-full mr-4 group-hover:bg-accent transition-colors"
                       whileHover={{ scale: 1.5 }}
                     />
                     {item.label}
@@ -180,45 +180,36 @@ export function Footer({ onPageChange }: FooterProps) {
           >
             <h4 className="text-xl font-semibold text-white">{t('footer.contactInfo')}</h4>
             <div className="space-y-6">
-              <motion.div 
+              <motion.div
                 className="flex items-center space-x-4"
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.3 }}
               >
                 <div className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center">
-                  <span className="text-blue-400">@</span>
+                  <span className="text-primary">📞</span>
                 </div>
-                <a href="mailto:info@saivo.uz" className="text-gray-400 hover:text-blue-400 transition-colors text-lg">
-                  info@saivo.uz
-                </a>
-              </motion.div>
-              <motion.div 
-                className="flex items-center space-x-4"
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center">
-                  <span className="text-blue-400">📞</span>
-                </div>
-                <a href="tel:+998998019353" className="text-gray-400 hover:text-blue-400 transition-colors text-lg">
+                <a href="tel:+998998019353" className="text-gray-400 hover:text-primary transition-colors text-lg">
                   +998 99 801 93 53
                 </a>
               </motion.div>
-              <motion.div 
+              <motion.a
+                href="https://t.me/SAIVO_uz"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center space-x-4"
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.3 }}
               >
                 <div className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center">
-                  <span className="text-blue-400">📍</span>
+                  <span className="text-primary">✈</span>
                 </div>
-                <span className="text-gray-400 text-lg">Tashkent, Uzbekistan</span>
-              </motion.div>
+                <span className="text-gray-400 hover:text-primary transition-colors text-lg">@SAIVO_uz</span>
+              </motion.a>
             </div>
 
             {/* Quick Contact CTA */}
             <motion.div
-              className="mt-8 p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-500/20 backdrop-blur-sm"
+              className="mt-8 p-6 bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl border border-primary/20 backdrop-blur-sm"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 }}
@@ -228,7 +219,7 @@ export function Footer({ onPageChange }: FooterProps) {
               <p className="text-gray-400 text-sm mb-4">{t('footer.getInTouch')}</p>
               <motion.button
                 onClick={() => onPageChange('contact')}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-3 px-4 rounded-xl transition-all duration-300 hover:shadow-lg"
+                className="w-full bg-gradient-to-r from-primary to-[#6d28d9] text-white font-medium py-3 px-4 rounded-xl transition-all duration-300 hover:shadow-lg"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -278,7 +269,7 @@ export function Footer({ onPageChange }: FooterProps) {
 
       {/* Enhanced Decorative Elements */}
       <motion.div 
-        className="absolute top-20 right-20 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl"
+        className="absolute top-20 right-20 w-40 h-40 bg-primary/20 rounded-full blur-3xl"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.2, 0.4, 0.2],
@@ -290,7 +281,7 @@ export function Footer({ onPageChange }: FooterProps) {
         }}
       />
       <motion.div 
-        className="absolute bottom-20 left-20 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl"
+        className="absolute bottom-20 left-20 w-32 h-32 bg-accent/20 rounded-full blur-2xl"
         animate={{
           scale: [1.2, 1, 1.2],
           opacity: [0.4, 0.2, 0.4],

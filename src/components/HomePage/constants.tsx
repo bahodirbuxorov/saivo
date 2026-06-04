@@ -12,72 +12,56 @@ import {
 } from 'lucide-react';
 
 export const getStats = (t: (key: string) => string) => [
-  { 
-    number: '10+', 
-    label: t('home.stats.projectsDelivered'), 
-    icon: <CheckCircle2 className="h-8 w-8" />, 
-    color: 'text-blue-600',
-    bgGradient: 'from-blue-500/20 to-blue-600/20'
+  {
+    number: '10+',
+    label: t('home.stats.projectsDelivered'),
+    icon: <CheckCircle2 className="h-7 w-7" />,
+    accent: '#8b5cf6'
   },
-  { 
-    number: '2', 
-    label: t('home.stats.internationalClients'), 
-    icon: <Globe className="h-8 w-8" />, 
-    color: 'text-emerald-600',
-    bgGradient: 'from-emerald-500/20 to-emerald-600/20'
+  {
+    number: '2',
+    label: t('home.stats.internationalClients'),
+    icon: <Globe className="h-7 w-7" />,
+    accent: '#22d3ee'
   },
-  { 
-    number: '95%', 
-    label: t('home.stats.clientSatisfaction'), 
-    icon: <Heart className="h-8 w-8" />, 
-    color: 'text-pink-600',
-    bgGradient: 'from-pink-500/20 to-pink-600/20'
+  {
+    number: '95%',
+    label: t('home.stats.clientSatisfaction'),
+    icon: <Heart className="h-7 w-7" />,
+    accent: '#fb7185'
   },
-  { 
-    number: '24/7', 
-    label: t('home.stats.supportAvailable'), 
-    icon: <Timer className="h-8 w-8" />, 
-    color: 'text-purple-600',
-    bgGradient: 'from-purple-500/20 to-purple-600/20'
+  {
+    number: '24/7',
+    label: t('home.stats.supportAvailable'),
+    icon: <Timer className="h-7 w-7" />,
+    accent: '#fbbf24'
   }
 ];
 
 export const getFeatures = (t: (key: string) => string) => [
   {
-    icon: <Code className="h-10 w-10" />,
+    icon: <Code className="h-7 w-7" />,
     title: t('home.features.customDevelopment'),
     description: t('home.features.customDesc'),
-    color: 'from-blue-500 to-blue-600',
-    bgColor: 'from-blue-50 to-blue-100',
-    borderColor: 'border-blue-200/50',
-    hoverBg: 'hover:from-blue-100 hover:to-blue-200'
+    accent: '#8b5cf6'
   },
   {
-    icon: <Brain className="h-10 w-10" />,
+    icon: <Brain className="h-7 w-7" />,
     title: t('home.features.aiSolutions'),
     description: t('home.features.aiDesc'),
-    color: 'from-purple-500 to-purple-600',
-    bgColor: 'from-purple-50 to-purple-100',
-    borderColor: 'border-purple-200/50',
-    hoverBg: 'hover:from-purple-100 hover:to-purple-200'
+    accent: '#a78bfa'
   },
   {
-    icon: <Globe className="h-10 w-10" />,
+    icon: <Globe className="h-7 w-7" />,
     title: t('home.features.globalInfrastructure'),
     description: t('home.features.globalDesc'),
-    color: 'from-emerald-500 to-emerald-600',
-    bgColor: 'from-emerald-50 to-emerald-100',
-    borderColor: 'border-emerald-200/50',
-    hoverBg: 'hover:from-emerald-100 hover:to-emerald-200'
+    accent: '#22d3ee'
   },
   {
-    icon: <Shield className="h-10 w-10" />,
+    icon: <Shield className="h-7 w-7" />,
     title: t('home.features.enterpriseSecurity'),
     description: t('home.features.enterpriseDesc'),
-    color: 'from-red-500 to-red-600',
-    bgColor: 'from-red-50 to-red-100',
-    borderColor: 'border-red-200/50',
-    hoverBg: 'hover:from-red-100 hover:to-red-200'
+    accent: '#fbbf24'
   }
 ];
 

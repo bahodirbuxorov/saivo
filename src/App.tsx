@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { TranslationProvider, useTranslation, Language } from './lib/translations';
+import { ThemeProvider } from './components/ThemeProvider';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 import { HomePage } from './components/HomePage';
@@ -485,7 +486,7 @@ function AppContent() {
   }, [currentPage, articleId]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       <Navigation currentPage={currentPage} onPageChange={handlePageChange} />
       
       <AnimatePresence mode="wait">
@@ -509,8 +510,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <TranslationProvider>
-      <AppContent />
-    </TranslationProvider>
+    <ThemeProvider>
+      <TranslationProvider>
+        <AppContent />
+      </TranslationProvider>
+    </ThemeProvider>
   );
 }

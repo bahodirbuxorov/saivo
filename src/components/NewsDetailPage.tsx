@@ -126,11 +126,11 @@ export function NewsDetailPage({ onNavigate, articleId }: NewsDetailPageProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-20">
+      <div className="min-h-screen bg-background pt-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex justify-center items-center py-20">
-            <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
-            <span className="ml-2 text-gray-600">Loading article...</span>
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <span className="ml-2 text-muted-foreground">Loading article...</span>
           </div>
         </div>
       </div>
@@ -139,14 +139,14 @@ export function NewsDetailPage({ onNavigate, articleId }: NewsDetailPageProps) {
 
   if (error || !article) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-20">
+      <div className="min-h-screen bg-background pt-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           {/* Back Navigation */}
           <div className="mb-8">
             <Button
               variant="ghost"
               onClick={() => onNavigate('news')}
-              className="text-gray-600 hover:text-gray-900 p-0"
+              className="text-muted-foreground hover:text-foreground p-0"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to News
@@ -157,10 +157,10 @@ export function NewsDetailPage({ onNavigate, articleId }: NewsDetailPageProps) {
             <div className="text-red-500 text-6xl mb-4">
               {error?.includes('timeout') ? '⏰' : '📰'}
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl font-bold text-foreground mb-4">
               {error?.includes('timeout') ? 'Request Timed Out' : 'Article Not Found'}
             </h2>
-            <p className="text-gray-600 mb-8 max-w-md mx-auto">
+            <p className="text-muted-foreground mb-8 max-w-md mx-auto">
               {error || 'The article you\'re looking for doesn\'t exist or couldn\'t be loaded.'}
             </p>
             <div className="flex gap-4 justify-center">
@@ -169,7 +169,7 @@ export function NewsDetailPage({ onNavigate, articleId }: NewsDetailPageProps) {
                 Back to News
               </Button>
               {error?.includes('timeout') || error?.includes('Failed') ? (
-                <Button onClick={handleRetry} className="bg-blue-600 hover:bg-blue-700">
+                <Button onClick={handleRetry} className="bg-primary hover:bg-primary/90">
                   <RefreshCw className="h-4 w-4 mr-2" />
                   Try Again
                 </Button>
@@ -182,7 +182,7 @@ export function NewsDetailPage({ onNavigate, articleId }: NewsDetailPageProps) {
             </div>
             
             {retryCount > 0 && (
-              <div className="mt-4 text-sm text-gray-500">
+              <div className="mt-4 text-sm text-muted-foreground">
                 Retry attempts: {retryCount}
               </div>
             )}
@@ -200,7 +200,7 @@ export function NewsDetailPage({ onNavigate, articleId }: NewsDetailPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-20">
+    <div className="min-h-screen bg-background pt-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Navigation */}
         <motion.div
@@ -211,7 +211,7 @@ export function NewsDetailPage({ onNavigate, articleId }: NewsDetailPageProps) {
           <Button
             variant="ghost"
             onClick={() => onNavigate('news')}
-            className="text-gray-600 hover:text-gray-900 p-0"
+            className="text-muted-foreground hover:text-foreground p-0"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to News
@@ -228,25 +228,25 @@ export function NewsDetailPage({ onNavigate, articleId }: NewsDetailPageProps) {
           <div className="mb-6">
             <div className="flex gap-2 mb-4">
               {article.featured && (
-                <Badge className="bg-yellow-500 text-white">
+                <Badge className="bg-accent text-accent-foreground">
                   <Star className="h-3 w-3 mr-1" />
                   Featured
                 </Badge>
               )}
-              <Badge className="bg-blue-600 text-white">
+              <Badge className="bg-primary text-primary-foreground">
                 {article.category}
               </Badge>
             </div>
             
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
               {article.title}
             </h1>
             
-            <p className="text-xl text-gray-600 leading-relaxed font-medium mb-6">
+            <p className="text-xl text-muted-foreground leading-relaxed font-medium mb-6">
               {article.subtitle}
             </p>
             
-            <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-6">
+            <div className="flex flex-wrap items-center gap-6 text-muted-foreground mb-6">
               <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
                 <span>
@@ -290,7 +290,7 @@ export function NewsDetailPage({ onNavigate, articleId }: NewsDetailPageProps) {
                 variant="outline"
                 size="sm"
                 onClick={handleShare}
-                className="text-gray-600 hover:text-blue-600"
+                className="text-muted-foreground hover:text-primary"
               >
                 <Share2 className="h-4 w-4 mr-2" />
                 Share
@@ -324,9 +324,9 @@ export function NewsDetailPage({ onNavigate, articleId }: NewsDetailPageProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 md:p-12">
+          <div className="glass rounded-2xl p-8 md:p-12">
             <div 
-              className="text-gray-800 leading-relaxed"
+              className="text-foreground leading-relaxed"
               dangerouslySetInnerHTML={{ __html: article.content }}
               style={{
                 fontSize: '18px',
@@ -343,10 +343,10 @@ export function NewsDetailPage({ onNavigate, articleId }: NewsDetailPageProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+          <div className="glass rounded-2xl p-6">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
               <div>
-                <h3 className="font-semibold text-gray-900 mb-4">Tags</h3>
+                <h3 className="font-semibold text-foreground mb-4">Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {article.tags.map((tag) => (
                     <Badge key={tag} variant="outline" className="text-sm">
@@ -357,9 +357,9 @@ export function NewsDetailPage({ onNavigate, articleId }: NewsDetailPageProps) {
               </div>
               
               <div className="text-right">
-                <h3 className="font-semibold text-gray-900 mb-2">Author</h3>
-                <p className="text-gray-800 font-medium">{article.author.name}</p>
-                <p className="text-gray-600 text-sm">{article.author.role}</p>
+                <h3 className="font-semibold text-foreground mb-2">Author</h3>
+                <p className="text-foreground font-medium">{article.author.name}</p>
+                <p className="text-muted-foreground text-sm">{article.author.role}</p>
               </div>
             </div>
           </div>
@@ -367,27 +367,27 @@ export function NewsDetailPage({ onNavigate, articleId }: NewsDetailPageProps) {
 
         {/* CTA Section */}
         <motion.div
-          className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-center text-white"
+          className="bg-gradient-to-r from-primary to-[#6d28d9] rounded-2xl p-8 text-center text-white glow-primary"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
         >
           <h3 className="text-2xl font-bold mb-4">Stay Updated</h3>
-          <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+          <p className="text-white/80 mb-6 max-w-2xl mx-auto">
             Don't miss our latest news and insights. Follow our social media channels for regular updates.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => onNavigate('news')}
               variant="secondary"
-              className="bg-white text-blue-600 hover:bg-blue-50"
+              className="bg-white text-primary hover:bg-white/90"
             >
               Read More Articles
             </Button>
             <Button
               onClick={() => onNavigate('contact')}
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-blue-600"
+              className="border-white text-white hover:bg-white hover:text-primary"
             >
               Contact Us
             </Button>

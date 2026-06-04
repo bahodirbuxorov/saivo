@@ -1,17 +1,36 @@
 
   <!DOCTYPE html>
-  <html lang="en">
+  <html lang="en" class="dark" style="color-scheme: dark; background-color: #07080f;">
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="theme-color" content="#07080f" />
       <title>SAIVO IT Company Website</title>
   <link rel="icon" type="image/x-icon" href="/assets/favicon-B51laX7A.ico" />
-      <script type="module" crossorigin src="/assets/index-BKxuVUfD.js"></script>
-      <link rel="stylesheet" crossorigin href="/assets/index-kg_YTuxI.css">
+      <script>
+        // Apply persisted theme before paint to avoid a flash of the wrong theme.
+        (function () {
+          try {
+            var stored = localStorage.getItem('theme');
+            var theme = stored && stored !== 'system'
+              ? stored
+              : (stored === 'system'
+                  ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+                  : 'dark');
+            var el = document.documentElement;
+            el.classList.remove('light', 'dark');
+            el.classList.add(theme);
+            el.style.colorScheme = theme;
+            el.style.backgroundColor = theme === 'dark' ? '#07080f' : '#ffffff';
+          } catch (e) {}
+        })();
+      </script>
+      <script type="module" crossorigin src="/assets/index-aQHrj4Xa.js"></script>
+      <link rel="stylesheet" crossorigin href="/assets/index--qjs92Np.css">
     </head>
 
     <body>
-      <div id="root"></div>
+      <div id="root"></div>
     </body>
   </html>
   

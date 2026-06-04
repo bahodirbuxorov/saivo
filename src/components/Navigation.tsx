@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Globe } from 'lucide-react';
 import { Button } from './ui/button';
+import { ThemeToggle } from './ThemeToggle';
 import { useTranslation, Language } from '../lib/translations';
 import logoImage from 'figma:asset/63505825ddf0afbbe8b8fb3acd0c6cd461452f53.png';
 
@@ -54,8 +55,8 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-200/50' 
+      isScrolled
+        ? 'glass-strong border-b border-border shadow-lg'
         : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -82,10 +83,8 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
                 onClick={() => handlePageChange(item.page)}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
                   currentPage === item.page
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : isScrolled
-                    ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
-                    : 'text-gray-800 hover:text-blue-600 hover:bg-white/80'
+                    ? 'bg-primary text-primary-foreground shadow-lg glow-primary'
+                    : 'text-foreground/70 hover:text-primary hover:bg-primary/10'
                 }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -93,16 +92,15 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
                 {item.name}
               </motion.button>
             ))}
-            
+
+            {/* Theme toggle */}
+            <ThemeToggle className="ml-2" />
+
             {/* Language Selector */}
-            <div className="relative ml-4">
+            <div className="relative ml-1">
               <motion.button
                 onClick={() => setShowLanguageMenu(!showLanguageMenu)}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
-                  isScrolled
-                    ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
-                    : 'text-gray-800 hover:text-blue-600 hover:bg-white/80'
-                }`}
+                className="flex items-center space-x-2 px-3 py-2 rounded-xl text-sm font-medium text-foreground/70 transition-all duration-300 hover:text-primary hover:bg-primary/10"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -114,26 +112,25 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
               <AnimatePresence>
                 {showLanguageMenu && (
                   <motion.div
-                    className="absolute right-0 top-full mt-2 w-40 bg-white rounded-xl shadow-lg border border-gray-200/50 py-2 z-50"
+                    className="absolute right-0 top-full mt-2 w-40 rounded-xl glass-strong border border-border py-2 z-50 shadow-lg"
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
                     transition={{ duration: 0.2 }}
                   >
                     {languages.map((lang) => (
-                      <motion.button
+                      <button
                         key={lang.code}
                         onClick={() => handleLanguageChange(lang.code)}
                         className={`w-full text-left px-4 py-2 text-sm transition-colors duration-200 flex items-center space-x-3 ${
                           language === lang.code
-                            ? 'bg-blue-50 text-blue-600'
-                            : 'text-gray-700 hover:bg-gray-50'
+                            ? 'bg-primary/10 text-primary'
+                            : 'text-foreground/70 hover:bg-muted'
                         }`}
-                        whileHover={{ backgroundColor: '#f3f4f6' }}
                       >
                         <span>{lang.flag}</span>
                         <span>{lang.name}</span>
-                      </motion.button>
+                      </button>
                     ))}
                   </motion.div>
                 )}
@@ -142,14 +139,14 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
           </div>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden flex items-center space-x-3">
+          <div className="lg:hidden flex items-center space-x-2">
+            <ThemeToggle />
+
             {/* Mobile Language Selector */}
             <div className="relative">
               <motion.button
                 onClick={() => setShowLanguageMenu(!showLanguageMenu)}
-                className={`flex items-center space-x-1 px-2 py-1 rounded-lg text-sm ${
-                  isScrolled ? 'text-gray-700' : 'text-gray-800'
-                }`}
+                className="flex items-center space-x-1 px-2 py-1 rounded-lg text-sm text-foreground/80"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -160,25 +157,25 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
               <AnimatePresence>
                 {showLanguageMenu && (
                   <motion.div
-                    className="absolute right-0 top-full mt-2 w-32 bg-white rounded-xl shadow-lg border border-gray-200/50 py-2 z-50"
+                    className="absolute right-0 top-full mt-2 w-32 rounded-xl glass-strong border border-border py-2 z-50 shadow-lg"
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
                     transition={{ duration: 0.2 }}
                   >
                     {languages.map((lang) => (
-                      <motion.button
+                      <button
                         key={lang.code}
                         onClick={() => handleLanguageChange(lang.code)}
                         className={`w-full text-left px-3 py-2 text-sm transition-colors duration-200 flex items-center space-x-2 ${
                           language === lang.code
-                            ? 'bg-blue-50 text-blue-600'
-                            : 'text-gray-700 hover:bg-gray-50'
+                            ? 'bg-primary/10 text-primary'
+                            : 'text-foreground/70 hover:bg-muted'
                         }`}
                       >
                         <span>{lang.flag}</span>
                         <span className="text-xs">{lang.name}</span>
-                      </motion.button>
+                      </button>
                     ))}
                   </motion.div>
                 )}
@@ -189,9 +186,7 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
               variant="ghost"
               size="sm"
               onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 ${
-                isScrolled ? 'text-gray-700' : 'text-gray-800'
-              }`}
+              className="p-2 text-foreground/80"
             >
               <AnimatePresence mode="wait">
                 {isOpen ? (
@@ -224,7 +219,7 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg shadow-lg border-t border-gray-200/50"
+              className="lg:hidden absolute top-full left-0 right-0 glass-strong shadow-lg border-t border-border"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
@@ -237,8 +232,8 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
                     onClick={() => handlePageChange(item.page)}
                     className={`w-full text-left px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ${
                       currentPage === item.page
-                        ? 'bg-blue-600 text-white shadow-lg'
-                        : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+                        ? 'bg-primary text-primary-foreground shadow-lg'
+                        : 'text-foreground/70 hover:text-primary hover:bg-primary/10'
                     }`}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
